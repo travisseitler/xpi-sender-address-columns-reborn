@@ -5,8 +5,8 @@
   <rdf:Description rdf:about="urn:mozilla:install-manifest">
         <em:id>SenderAddressColumn@example.com</em:id>
         <em:name>SenderAddressColumn</em:name>
-        <em:version>1.0.0</em:version>
-        <em:description>Adds columns that show the sender address in full and also broken out by domain and local part.</em:description>
+        <em:version>1.1.0</em:version>
+        <em:description>Adds columns that show the sender address in full and also broken out by domain, local part, and top-level domain.</em:description>
         <em:creator>D. Antoni</em:creator>   
         <em:homepageURL></em:homepageURL>
         <em:iconURL>chrome://SenderAddressColumn/skin/icon.png</em:iconURL>
@@ -29,7 +29,7 @@
 	    <rdf:Description>
 		<em:locale>es</em:locale>
 		<em:name>ColumnaDirecciónDelRemitente</em:name>
-		<em:description>Añade columnas que mustran la dirección del remitente completa y tambien dividida por dominio y usuario. </em:description>
+		<em:description>Añade columnas que mustran la dirección del remitente completa y tambien dividida por dominio, dominio de primer nivel, y usuario. </em:description>
 		<em:translator>D. Antoni</em:translator>
 		<em:creator>D. Antoni</em:creator>
 	    </rdf:Description>

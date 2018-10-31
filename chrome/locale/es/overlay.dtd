@@ -1,7 +1,9 @@
-﻿<!ENTITY SenderAddressColumn.colLabel "Dirección del Remitente">
+﻿<!ENTITY SenderAddressColumn.colLabel "Dirección Remitente">
 <!ENTITY SenderAddressColumn.colTooltip "Cliquee para ordenar los mensajes por la dirección del remitente.">
-<!ENTITY SenderDomainColumn.colLabel "Dominio del Remitente">
+<!ENTITY SenderDomainColumn.colLabel "Dirección Remitente: Dominio">
 <!ENTITY SenderDomainColumn.colTooltip "Cliquee para ordenar los mensajes por el dominio del remitente.">
-<!ENTITY SenderUsernameColumn.colLabel "Usuario del Remitente">
-<!ENTITY SenderUsernameColumn.colTooltip "Cliquee para ordenar los mensajes por el nombre usuario del remitente.">
+<!ENTITY SenderLocalPartColumn.colLabel "Dirección Remitente: Parte Local (Usuario)">
+<!ENTITY SenderLocalPartColumn.colTooltip "Cliquee para ordenar los mensajes por el nombre usuario del remitente.">
+<!ENTITY SenderTLDColumn.colLabel "Dirección Remitente: Dominio Superior">
+<!ENTITY SenderTLDColumn.colTooltip "Cliquee para ordenar los mensajes por el dominio superior del remitente.">
 

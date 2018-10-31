@@ -42,11 +42,18 @@
 	    
 		<treecols id="threadCols">
             <splitter class="tree-splitter" />
-            <treecol id="colSenderUsername" persist="hidden ordinal width"
+            <treecol id="colSenderLocalPart" persist="hidden ordinal width"
                      currentView="unthreaded" flex="2"
-                     label="&SenderUsernameColumn.colLabel;" tooltiptext="&SenderUsernameColumn.colTooltip;" />
+                     label="&SenderLocalPartColumn.colLabel;" tooltiptext="&SenderLocalPartColumn.colTooltip;" />
         </treecols>
-
+  
+		<treecols id="threadCols">
+            <splitter class="tree-splitter" />
+            <treecol id="colSenderTLD" persist="hidden ordinal width"
+                     currentView="unthreaded" flex="2"
+                     label="&SenderTLDColumn.colLabel;" tooltiptext="&SenderTLDColumn.colTooltip;" />
+        </treecols>
+		
 	</tree>
 
     

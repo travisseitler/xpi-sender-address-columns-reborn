@@ -1,6 +1,8 @@
 ﻿<!ENTITY SenderAddressColumn.colLabel "Sender Address">
 <!ENTITY SenderAddressColumn.colTooltip "Click to sort messages by sender address.">
-<!ENTITY SenderDomainColumn.colLabel "Sender Domain">
+<!ENTITY SenderDomainColumn.colLabel "Sender Address: Domain">
 <!ENTITY SenderDomainColumn.colTooltip "Click to sort messages by the domain of the sender address.">
-<!ENTITY SenderUsernameColumn.colLabel "Sender Local Part">
-<!ENTITY SenderUsernameColumn.colTooltip "Click to sort messages by the local part of the sender address.">
+<!ENTITY SenderLocalPartColumn.colLabel "Sender Address: Local Part">
+<!ENTITY SenderLocalPartColumn.colTooltip "Click to sort messages by the local part of the sender address.">
+<!ENTITY SenderTLDColumn.colLabel "Sender Address: Top Domain">
+<!ENTITY SenderTLDColumn.colTooltip "Click to sort messages by the top level domain of the sender address.">

@@ -20,55 +20,61 @@ function SenderAddressColumn()
 {
     this.sTreeColName  = 'colSenderAddress';	
     this.PATTERN       = /\b(?:.+)@(?:.+)\b/ ;
-	this.STRICTPATTERN = /((?:\b[a-zA-Z0-9._%+-]+)@(?:(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,6}))\b/ ;
 }
-
 
 SenderAddressColumn.prototype = 
 {
     constructor: SenderAddressColumn,
    
     init: function() 
-	{
-        this.Cc = Components.classes;
-        this.Ci = Components.interfaces;
-      
-        this.initialized 	= true;   
-
-	    // fetch services
-        this.oServiceHdrParser = Cc["@mozilla.org/messenger/headerparser;1"].getService(Ci.nsIMsgHeaderParser);   
-        this.oServiceObserver  = Cc["@mozilla.org/observer-service;1"].getService(Ci.nsIObserverService);
-		  
-	    // register observer	
-	    this.oServiceObserver.addObserver(this, "MsgCreateDBView", false);	
-	},
-		
-	_getAddress: function (oDecodedAddress) 
     {
-	   var addresses = {};
-	   var names = {};
-	   this.oServiceHdrParser.parseHeadersWithArray(oDecodedAddress, addresses, names, {});
-	   return (addresses.value);   
+        var Cc = Components.classes;
+        var Ci = Components.interfaces;
+      
+	    // Save strict pattern
+        this.oStrictPattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+       
+        // fetch services
+        this.oServiceHdrParser = Cc["@mozilla.org/messenger/headerparser;1"].getService(Ci.nsIMsgHeaderParser);   
+			
+	    // register observer	
+        var oServiceObserver = Cc["@mozilla.org/observer-service;1"].getService(Ci.nsIObserverService);
+	    oServiceObserver.addObserver(this, "MsgCreateDBView", false);	
+
+        this.initialized = true;   
+    },
+    
+    _getAddress: function (oDecodedAddress) 
+    {
+	    var addresses = {};
+	    var names = {};
+	    this.oServiceHdrParser.parseHeadersWithArray(oDecodedAddress, addresses, names, {});
+	    return (addresses.value);   
     },
    
-	_getUnfilteredColumnData: function (oHdr) 
-	{
-	   return this._getAddress (oHdr.mime2DecodedAuthor);
-    },
-  	
-	_getFilteredColumnData: function (oHdr) 
-    { 		
-		var sData         = this._getUnfilteredColumnData (oHdr);   
-	    var sMatch        = this.PATTERN.exec(sData);	
-	    var bStrictMatch  = this.STRICTPATTERN.test(sData);
-    	 
-	    if (! bStrictMatch) { return ("[" + sMatch[1] + "]"); }
-	    else                { return (sMatch[1]); }
+    _getUnfilteredColumnData: function (oHdr) 
+    {
+        return this._getAddress (oHdr.mime2DecodedAuthor);
     },
 	
-	_getColumnData: function (oHdr) 
-	{
-	   return this._getUnfilteredColumnData (oHdr);
+    _getFilteredColumnData: function (oHdr) 
+    {	
+	    var sData         = this._getUnfilteredColumnData(oHdr);   
+	    var sMatch        = this.PATTERN.exec(sData);	
+	    var bStrictMatch  = this.oStrictPattern.test(sData);
+		
+        var sResult = sMatch[1];
+        
+	    if (! bStrictMatch) { sResult = "[" + sResult + "]"; }
+       
+		//var sReturnPath = oHdr.getStringProperty("Return-path");        
+ 	    //if (sReturnPath != sData) { sResult = sResult + "  RETURN-PATH={" + sReturnPath + "}"}
+        return sResult;
+    },
+	
+    _getColumnData: function (oHdr) 
+    {
+	    return this._getUnfilteredColumnData(oHdr);
     },
 	
 	
@@ -76,7 +82,7 @@ SenderAddressColumn.prototype =
 
    observe: function (subject, sTopic, wsData)
    {  
-        gDBView.addColumnHandler(this.sTreeColName, this);
+       gDBView.addColumnHandler(this.sTreeColName, this);
    },
 
  
@@ -130,12 +136,12 @@ SenderAddressColumn.prototype =
    
    getCellText: function (iRow, iCol) 
    {
-      //get the message's header 
-	  var iKey = gDBView.getKeyAt(iRow);   
-	  var oHdr = gDBView.getFolderForViewIndex(iRow).GetMessageHeader(iKey);
-	     
-      //extract the sender's address from the header 
-      return this._getColumnData(oHdr);
+       //get the message's header 
+	   var iKey = gDBView.getKeyAt(iRow);   
+	   var oHdr = gDBView.getFolderForViewIndex(iRow).GetMessageHeader(iKey);
+		 
+       //extract the sender's address from the header 
+       return this._getColumnData(oHdr);
    },
 
 
@@ -147,8 +153,8 @@ SenderAddressColumn.prototype =
    
    getSortStringForRow: function (oHdr) 
    {
-	  //extract the sender's address from the header 
-	  return this._getColumnData(oHdr);
+	   //extract the sender's address from the header 
+	   return this._getColumnData(oHdr);
    },
  
  
@@ -166,9 +172,9 @@ SenderAddressColumn.prototype =
    // *** affect whether getCellText vs. getImageSrc is used to determine
    // *** what to display.
    
-   isString: function ()  { return true; },
+   isString: function ()  { return true; }
   
-}
+};
 
 
 var inheritPrototype = (function () {
@@ -176,40 +182,50 @@ var inheritPrototype = (function () {
     function Obj() {};
 
     return function ($oProto) 
-	{
+    {
         Obj.prototype = $oProto.prototype;
         return new Obj;
     };
-}());
-
-
-// ------  Sender Domain column -------
+}()); 
+ 
+// ------  Sender Address: Domain column -------
 function SenderAddressColumn_Domain () 
 {
     this.sTreeColName  = 'colSenderDomain';
     this.PATTERN       = /\b(?:.+)@(.+)\b/ ;
-	this.STRICTPATTERN = /(?:\b[a-zA-Z0-9._%+-]+)@((?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,6})\b/ ;
 }
 SenderAddressColumn_Domain.prototype = inheritPrototype(SenderAddressColumn);
 SenderAddressColumn_Domain.prototype._getColumnData = function (oHdr) 
 {
-	return SenderAddressColumn.prototype._getFilteredColumnData.call (this, oHdr);   
-}
+    return SenderAddressColumn.prototype._getFilteredColumnData.call (this, oHdr);   
+};
 
-// ------  Sender Username column -------
-function SenderAddressColumn_Username () 
+// ------  Sender Address: Top- Level Domain column -------
+function SenderAddressColumn_TLD () 
 {
-    this.sTreeColName  = 'colSenderUsername';
-	this.PATTERN       = /\b(.+)@(?:.+)\b/ ;
-	this.STRICTPATTERN = /(\b[a-zA-Z0-9._%+-]+)@(?:(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,6})\b/ ;
+    this.sTreeColName  = 'colSenderTLD';
+    this.PATTERN       = /\b(?:.+)@(?:.+)(\.[a-zA-Z]*$)\b/ ;
 }
-SenderAddressColumn_Username.prototype = inheritPrototype(SenderAddressColumn);
-SenderAddressColumn_Username.prototype._getColumnData = function (oHdr) 
+SenderAddressColumn_TLD.prototype = inheritPrototype(SenderAddressColumn);
+SenderAddressColumn_TLD.prototype._getColumnData = function (oHdr) 
+{
+    return SenderAddressColumn.prototype._getFilteredColumnData.call (this, oHdr);   
+};
+
+// ------  Sender Address: Local Part column -------
+function SenderAddressColumn_LocalPart () 
+{
+    this.sTreeColName  = 'colSenderLocalPart';
+    this.PATTERN       = /\b(.+)@(?:.+)\b/ ;
+}
+SenderAddressColumn_LocalPart.prototype = inheritPrototype(SenderAddressColumn);
+SenderAddressColumn_LocalPart.prototype._getColumnData = function (oHdr) 
 { 
-	return SenderAddressColumn.prototype._getFilteredColumnData.call (this, oHdr);   
-}
+    return SenderAddressColumn.prototype._getFilteredColumnData.call (this, oHdr);   
+};
 
 
 window.addEventListener("load", function () { new SenderAddressColumn().init(); }, false);
 window.addEventListener("load", function () { new SenderAddressColumn_Domain().init(); }, false);
-window.addEventListener("load", function () { new SenderAddressColumn_Username().init(); }, false);
+window.addEventListener("load", function () { new SenderAddressColumn_LocalPart().init(); }, false);
+window.addEventListener("load", function () { new SenderAddressColumn_TLD().init(); }, false);
