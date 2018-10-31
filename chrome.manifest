@@ -1,0 +1,5 @@
+content   SenderAddressColumn                 chrome/content/
+skin      SenderAddressColumn   classic/1.0   chrome/skin/
+locale    SenderAddressColumn   en-US         chrome/locale/en-US/
+locale    SenderAddressColumn   es            chrome/locale/es/
+overlay chrome://messenger/content/messenger.xul chrome://SenderAddressColumn/content/SenderAddressColumn.xul

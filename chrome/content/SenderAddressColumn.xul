@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+|  SenderAddressColumn Add-on for Thunderbird
+|  Copyright (C) 2014 D. Antoni
+|  
+|  This program is free software: you can redistribute it and/or modify
+|  it under the terms of the GNU General Public License as published by
+|  the Free Software Foundation, either version 3 of the License, or
+|  (at your option) any later version.
+|
+|  This program is distributed in the hope that it will be useful,
+|  but WITHOUT ANY WARRANTY; without even the implied warranty of
+|  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+|  GNU General Public License for more details.
+|
+|  You should have received a copy of the GNU General Public License
+|  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<?xml-stylesheet href="chrome://SenderAddressColumn/skin/overlay.css" type="text/css"?>
+<!DOCTYPE overlay SYSTEM "chrome://SenderAddressColumn/locale/overlay.dtd">
+<overlay id="SenderAddressColumn-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+ 
+    <!-- include our javascript file -->
+    <script type="application/x-javascript"  src="chrome://SenderAddressColumn/content/SenderAddressColumn.js"/> 
+
+    <tree id="threadTree">
+        
+		<treecols id="threadCols">
+            <splitter class="tree-splitter" />
+            <treecol id="colSenderAddress" persist="hidden ordinal width"
+                     currentView="unthreaded" flex="2"
+                     label="&SenderAddressColumn.colLabel;" tooltiptext="&SenderAddressColumn.colTooltip;" />
+        </treecols>
+		
+	    <treecols id="threadCols">
+            <splitter class="tree-splitter" />
+            <treecol id="colSenderDomain" persist="hidden ordinal width"
+                     currentView="unthreaded" flex="2"
+                     label="&SenderDomainColumn.colLabel;" tooltiptext="&SenderDomainColumn.colTooltip;" />
+        </treecols>
+	    
+		<treecols id="threadCols">
+            <splitter class="tree-splitter" />
+            <treecol id="colSenderUsername" persist="hidden ordinal width"
+                     currentView="unthreaded" flex="2"
+                     label="&SenderUsernameColumn.colLabel;" tooltiptext="&SenderUsernameColumn.colTooltip;" />
+        </treecols>
+
+	</tree>
+
+    
+    <stringbundleset id="stringbundleset">
+        <stringbundle id="SenderAddressColumn-strings" src="chrome://SenderAddressColumn/locale/overlay.properties"/>
+    </stringbundleset>
+
+  
+ </overlay>
