@@ -3,12 +3,13 @@
      xmlns:em="http://www.mozilla.org/2004/em-rdf#">
 
   <rdf:Description rdf:about="urn:mozilla:install-manifest">
-        <em:id>SenderAddressColumn@example.com</em:id>
+        <em:id>SenderAddressColumnsReborn@travisseitler.github</em:id>
         <em:name>SenderAddressColumn</em:name>
         <em:version>1.1.0</em:version>
         <em:description>Adds columns that show the sender address in full and also broken out by domain, local part, and top-level domain.</em:description>
-        <em:creator>D. Antoni</em:creator>   
-        <em:homepageURL></em:homepageURL>
+        <em:creator>D. Antoni</em:creator>
+        <em:contributor>Travis Seitler</em:contributor>
+        <em:homepageURL>https://github.com/travisseitler/xpi-sender-address-columns-reborn/</em:homepageURL>
         <em:iconURL>chrome://SenderAddressColumn/skin/icon.png</em:iconURL>
         <em:type>2</em:type> <!-- 2 : Extension -->
 
