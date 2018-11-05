@@ -1,42 +1,42 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-     xmlns:em="http://www.mozilla.org/2004/em-rdf#">
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:em="http://www.mozilla.org/2004/em-rdf#">
 
   <rdf:Description rdf:about="urn:mozilla:install-manifest">
-        <em:id>SenderAddressColumnsReborn@travisseitler.github</em:id>
-        <em:name>SenderAddressColumn</em:name>
-        <em:version>1.1.0</em:version>
-        <em:description>Adds columns that show the sender address in full and also broken out by domain, local part, and top-level domain.</em:description>
+
+    <em:id>SenderAddressColumnsReborn@travisseitler.github</em:id>
+    <em:name>SenderAddressColumn</em:name>
+    <em:version>1.1.0</em:version>
+    <em:description>Adds columns that show the sender address in full and also broken out by domain, local part, and top-level domain.</em:description>
+    <em:creator>D. Antoni</em:creator>
+    <em:contributor>Travis Seitler</em:contributor>
+    <em:homepageURL>https://github.com/travisseitler/xpi-sender-address-columns-reborn/</em:homepageURL>
+    <em:iconURL>chrome://SenderAddressColumn/skin/icon.png</em:iconURL>
+    <em:type>2</em:type> <!-- 2 : Extension -->
+
+    <!-- May add options in a later release
+    <em:optionsURL>chrome://SenderAddressColumn/content/options.xul</em:optionsURL>
+    <em:optionsType>2</em:optionsType>
+    -->
+
+    <em:targetApplication>
+      <rdf:Description>
+        <!-- Thunderbird -->
+        <em:id>{3550f703-e582-4d05-9a08-453d09bdfdc6}</em:id>
+        <em:minVersion>7.0</em:minVersion>
+        <em:maxVersion>60.*</em:maxVersion>
+      </rdf:Description>
+    </em:targetApplication>
+
+    <em:localized>
+      <rdf:Description>
+        <em:locale>es</em:locale>
+        <em:name>ColumnaDirecciónDelRemitente</em:name>
+        <em:description>Añade columnas que mustran la dirección del remitente completa y tambien dividida por dominio, dominio de primer nivel, y usuario. </em:description>
+        <em:translator>D. Antoni</em:translator>
         <em:creator>D. Antoni</em:creator>
         <em:contributor>Travis Seitler</em:contributor>
-        <em:homepageURL>https://github.com/travisseitler/xpi-sender-address-columns-reborn/</em:homepageURL>
-        <em:iconURL>chrome://SenderAddressColumn/skin/icon.png</em:iconURL>
-        <em:type>2</em:type> <!-- 2 : Extension -->
-
-<!-- May add options in a later release
-        <em:optionsURL>chrome://SenderAddressColumn/content/options.xul</em:optionsURL>
-	<em:optionsType>2</em:optionsType>
--->
-         <em:targetApplication>
-            <rdf:Description>
-                <!-- Thunderbird -->
-                <em:id>{3550f703-e582-4d05-9a08-453d09bdfdc6}</em:id>
-                <em:minVersion>7.0</em:minVersion>
-                <em:maxVersion>60.*</em:maxVersion>
-            </rdf:Description>
-        </em:targetApplication>
-
-<em:localized>
-	    <rdf:Description>
-		<em:locale>es</em:locale>
-		<em:name>ColumnaDirecciónDelRemitente</em:name>
-		<em:description>Añade columnas que mustran la dirección del remitente completa y tambien dividida por dominio, dominio de primer nivel, y usuario. </em:description>
-		<em:translator>D. Antoni</em:translator>
-		<em:creator>D. Antoni</em:creator>
-        <em:contributor>Travis Seitler</em:contributor>
-	    </rdf:Description>
-	</em:localized>
+      </rdf:Description>
+    </em:localized>
 
   </rdf:Description>
 </rdf:RDF>
-  
